@@ -9,6 +9,7 @@
 #import "MJPerson+Eat.h"
 
 @implementation MJPerson (Eat)
+@dynamic weight,height;
 
 - (void)run
 {
@@ -32,6 +33,22 @@
 
 + (void)eat3
 {
+    
+}
+
+- (int)weight {
+    return 10;
+}
+
+- (double)height {
+    return 20.0;
+}
+
+- (void)setHeight:(double)height {
+    
+}
+
+- (void)setWeight:(int)weight {
     
 }
 

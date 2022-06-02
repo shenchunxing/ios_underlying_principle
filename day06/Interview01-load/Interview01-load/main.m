@@ -38,10 +38,43 @@ void printMethodNamesOfClass(Class cls)
     NSLog(@"%@ %@", cls, methodNames);
 }
 
+
+/**
+ +load方法相关源码阅读顺序：
+
+ _objc_init
+ load_images
+ prepare_load_methods
+ schedule_class_load
+ add_class_to_loadable_list
+ add_category_to_loadable_list
+ calls
+ call_class_loads
+ call_category_loads
+ (*load_method)(cls, SEL_load)
+ */
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         NSLog(@"---------------");
-        [MJStudent load];
+        /**
+         优先顺序：
+         先加载类的load
+         再加载分类的load
+         有继承关系的，先加载父类load、再加载子类的load，无继承关系的，按照编译顺序
+         分类的加载顺序是完全按照编译顺序，也就是谁在前面，谁先加载。和其绑定类的继承关系无关
+         即使有类的源文件，但是编译列表中没有，那么这个类就不会被编译，也就不会执行其load方法
+         */
+        /**
+         MJDog +load
+         MJPerson +load //MJStudent有继承关系的，先加载父类load、再加载子类的load
+         MJStudent +load
+         MJCat +load
+         MJStudent (Test1) +load
+         MJPerson (Test1) +load
+         MJPerson (Test2) +load
+         MJStudent (Test2) +load
+         */
+        [MJStudent load]; //使用后加载的分类MJStudent (Test2) +load
 //        objc_msgSend();
         // isa
         // superclass

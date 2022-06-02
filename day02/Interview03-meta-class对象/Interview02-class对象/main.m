@@ -44,15 +44,15 @@ int main(int argc, const char * argv[]) {
               object1,
               object2);
         
-        NSLog(@"class - %p %p %p %p %p %d",
+        NSLog(@"class - %p %p %p %p %p %d", //打印一样的地址，都是类对象
               objectClass1,
               objectClass2,
               objectClass3,
               objectClass4,
               objectClass5,
-              class_isMetaClass(objectClass3));
-        
-        NSLog(@"objectMetaClass - %p %d", objectMetaClass, class_isMetaClass(objectMetaClass));
+              class_isMetaClass(objectClass3)); //false
+    
+        NSLog(@"objectMetaClass - %p %d", objectMetaClass, class_isMetaClass(objectMetaClass)); //元类
         
         
     }

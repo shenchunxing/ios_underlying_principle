@@ -24,14 +24,14 @@
 //}; // 24
 
 struct NSObject_IMPL {
-    Class isa;
+    Class isa; //8
 };
 
 struct MJPerson_IMPL {
     struct NSObject_IMPL NSObject_IVARS;
-    int _age;
-    int _height;
-    int _no;
+    int _age;//4
+    int _height;//4
+    int _no;//4
 }; // 计算结构体大小，内存对齐，24
 
 //struct MJStudent_IMPL

@@ -74,6 +74,11 @@
 {
     
 }
+
++ (void)abc {
+    
+}
+
 @end
 
 int main(int argc, const char * argv[]) {
@@ -95,22 +100,22 @@ int main(int argc, const char * argv[]) {
         
         [MJStudent load];
         
-        [MJStudent abc];
+        [MJStudent abc]; //找不到方法报错
         
-//        MJPerson *person = [[MJPerson alloc] init];
-//        person->_age = 10;
-//        [person personInstanceMethod];
-//
-//        [MJPerson personClassMethod];
-//
-//        // objc_msgSend([MJPerson class], @selector(personClassMethod))
-//        // objc_msgSend(person, @selector(personInstanceMethod))
-//
-//        Class personClass = [MJPerson class];
-//
-//        Class personMetaClass = object_getClass(personClass);
+        MJPerson *person = [[MJPerson alloc] init];
+        person->_age = 10;
+        [person personInstanceMethod];
+
+        [MJPerson personClassMethod];
+
+//        objc_msgSend([MJPerson class], @selector(personClassMethod));
+//        objc_msgSend(person, @selector(personInstanceMethod));
+
+        Class personClass = [MJPerson class];
+
+        Class personMetaClass = object_getClass(personClass);
         
-//        NSLog(@"%p %p %p", person, personClass, personMetaClass);
+        NSLog(@"%p %p %p", person, personClass, personMetaClass);
     }
     return 0;
 }

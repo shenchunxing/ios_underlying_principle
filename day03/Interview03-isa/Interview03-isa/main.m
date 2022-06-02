@@ -94,17 +94,12 @@ int main(int argc, const char * argv[]) {
         
         NSLog(@"1111");
         
-//        MJPerson *person = [[MJPerson alloc] init];
-//
-        
-//        Class personClass = [MJPerson class];
-        
-//        struct mj_objc_class *personClass2 = (__bridge struct mj_objc_class *)(personClass);
-//
-//        Class personMetaClass = object_getClass(personClass);
-//
-//        NSLog(@"%p %p %p", person, personClass, personMetaClass);
-//        MJStudent *student = [[MJStudent alloc] init];
+        MJPerson *person = [[MJPerson alloc] init];
+        Class personClass1 = [MJPerson class];
+        struct mj_objc_class *personClass2 = (__bridge struct mj_objc_class *)(personClass1);
+        Class personMetaClass = object_getClass(personClass1);
+        NSLog(@"%p %p %p", person, personClass1, personMetaClass);
+        MJStudent *student = [[MJStudent alloc] init];
     }
     return 0;
 }

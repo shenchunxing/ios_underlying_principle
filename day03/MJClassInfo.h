@@ -24,33 +24,33 @@ typedef uint16_t mask_t;
 #endif
 typedef uintptr_t cache_key_t;
 
-struct bucket_t {
-    cache_key_t _key;
-    IMP _imp;
+struct bucket_t { //桶
+    cache_key_t _key;//方法查找的key
+    IMP _imp; //方法实现
 };
 
-struct cache_t {
+struct cache_t { //方法缓存
     bucket_t *_buckets;
-    mask_t _mask;
+    mask_t _mask; //掩码
     mask_t _occupied;
 };
 
-struct entsize_list_tt {
+struct entsize_list_tt { //列表
     uint32_t entsizeAndFlags;
     uint32_t count;
 };
 
-struct method_t {
+struct method_t { //方法
     SEL name;
     const char *types;
     IMP imp;
 };
 
-struct method_list_t : entsize_list_tt {
+struct method_list_t : entsize_list_tt { //方法列表
     method_t first;
 };
 
-struct ivar_t {
+struct ivar_t { //成员变量
     int32_t *offset;
     const char *name;
     const char *type;
@@ -58,20 +58,20 @@ struct ivar_t {
     uint32_t size;
 };
 
-struct ivar_list_t : entsize_list_tt {
+struct ivar_list_t : entsize_list_tt { //成员变量列表
     ivar_t first;
 };
 
-struct property_t {
-    const char *name;
-    const char *attributes;
+struct property_t { //属性
+    const char *name; //属性名
+    const char *attributes; //属性特性
 };
 
-struct property_list_t : entsize_list_tt {
+struct property_list_t : entsize_list_tt { //属性列表
     property_t first;
 };
 
-struct chained_property_list {
+struct chained_property_list { //属性链表
     chained_property_list *next;
     uint32_t count;
     property_t list[0];
@@ -79,11 +79,11 @@ struct chained_property_list {
 
 typedef uintptr_t protocol_ref_t;
 struct protocol_list_t {
-    uintptr_t count;
+    uintptr_t count; //属性数量
     protocol_ref_t list[0];
 };
 
-struct class_ro_t {
+struct class_ro_t { //只读
     uint32_t flags;
     uint32_t instanceStart;
     uint32_t instanceSize;  // instance对象占用的内存空间
@@ -92,17 +92,17 @@ struct class_ro_t {
 #endif
     const uint8_t * ivarLayout;
     const char * name;  // 类名
-    method_list_t * baseMethodList;
-    protocol_list_t * baseProtocols;
+    method_list_t * baseMethodList; //基本的方法列表
+    protocol_list_t * baseProtocols; //基础的协议列表
     const ivar_list_t * ivars;  // 成员变量列表
-    const uint8_t * weakIvarLayout;
-    property_list_t *baseProperties;
+    const uint8_t * weakIvarLayout; //weak成员变量布局
+    property_list_t *baseProperties;//基础属性列表
 };
 
-struct class_rw_t {
+struct class_rw_t { //可读可写
     uint32_t flags;
     uint32_t version;
-    const class_ro_t *ro;
+    const class_ro_t *ro; //只读
     method_list_t * methods;    // 方法列表
     property_list_t *properties;    // 属性列表
     const protocol_list_t * protocols;  // 协议列表
@@ -115,7 +115,7 @@ struct class_rw_t {
 struct class_data_bits_t {
     uintptr_t bits;
 public:
-    class_rw_t* data() {
+    class_rw_t* data() { //可读可写的地址是通过位运算查找到的
         return (class_rw_t *)(bits & FAST_DATA_MASK);
     }
 };
@@ -127,15 +127,15 @@ struct mj_objc_object {
 
 /* 类对象 */
 struct mj_objc_class : mj_objc_object {
-    Class superclass;
-    cache_t cache;
+    Class superclass; //父类
+    cache_t cache; //缓存
     class_data_bits_t bits;
 public:
-    class_rw_t* data() {
+    class_rw_t* data() { //可读可写
         return bits.data();
     }
     
-    mj_objc_class* metaClass() {
+    mj_objc_class* metaClass() { //元类
         return (mj_objc_class *)((long long)isa & ISA_MASK);
     }
 };

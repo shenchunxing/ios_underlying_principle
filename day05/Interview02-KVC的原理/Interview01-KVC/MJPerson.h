@@ -11,10 +11,10 @@
 @interface MJPerson : NSObject
 {
     @public
-//    int age;
-//    int isAge;
-//    int _isAge;
-//    int _age;
+    int age;
+    int isAge;
+    int _isAge;
+    int _age;
 }
 
 @end

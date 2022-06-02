@@ -9,8 +9,8 @@
 #import "MJStudent.h"
 
 @implementation MJStudent
-//+ (void)load
-//{
-//    NSLog(@"MJStudent +load");
-//}
++ (void)load
+{
+    NSLog(@"MJStudent +load");
+}
 @end

@@ -45,6 +45,13 @@ int main(int argc, const char * argv[]) {
 //        BOOL personInitialized = NO;
 //        BOOL teacherInitialized = NO;
         
+        /**
+         1、initialize的执行顺序为先父类、在子类
+         2、分类的initialize方法会覆盖主类的方法（假覆盖，方法都在，只是没有执行）
+         3、只有在这个类有发送消息的时候才会执行initialize，比如初始化对象、调用类方法等。
+         4、多个分类的情况，只执行一次，具体执行哪个分类的initialize，有编译顺序决定（Build Phases -> Compile Sources 中的顺序）
+         5、如果子类没有重写initialize，那么会调用其父类的initialize方法
+         */
         [MJStudent alloc];
         
 //        if (!sutdentInitialized) {

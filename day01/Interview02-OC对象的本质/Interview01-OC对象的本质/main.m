@@ -15,6 +15,7 @@
 //};
 //
 
+//Student_IMPL 是 student的内部实现
 struct Student_IMPL {
     Class isa;
     int _no;
@@ -24,9 +25,10 @@ struct Student_IMPL {
 
 @interface Student : NSObject
 {
+    //isa 8
     @public
-    int _no;
-    int _age;
+    int _no; //4
+    int _age; //4
 }
 @end
 
@@ -40,11 +42,11 @@ int main(int argc, const char * argv[]) {
         stu->_no = 4;
         stu->_age = 5;
         
-        NSLog(@"%zd", class_getInstanceSize([Student class]));
-        NSLog(@"%zd", malloc_size((__bridge const void *)stu));
+        NSLog(@"%zd", class_getInstanceSize([Student class])); //16 = 8 + 4 + 4
+        NSLog(@"%zd", malloc_size((__bridge const void *)stu)); //16
         
         
-        struct Student_IMPL *stuImpl = (__bridge struct Student_IMPL *)stu;
+        struct Student_IMPL *stuImpl = (__bridge struct Student_IMPL *)stu; 
         NSLog(@"no is %d, age is %d", stuImpl->_no, stuImpl->_age);
     }
     return 0;

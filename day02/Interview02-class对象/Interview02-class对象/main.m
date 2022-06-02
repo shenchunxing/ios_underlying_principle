@@ -18,7 +18,9 @@
 @end
 
 @implementation MJPerson
-- (void)test;
+- (void)test {
+    
+}
 @end
 
 int main(int argc, const char * argv[]) {
@@ -42,6 +44,9 @@ int main(int argc, const char * argv[]) {
               objectClass3,
               objectClass4,
               objectClass5);
+        
+        NSLog(@"%lld",class_isMetaClass(object_getClass([MJPerson class]))); //元类
+        NSLog(@"%lld",class_isMetaClass(object_getClass([NSObject class]))); //元类
     }
     return 0;
 }

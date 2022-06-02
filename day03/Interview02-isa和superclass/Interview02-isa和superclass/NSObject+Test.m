@@ -12,7 +12,7 @@
 
 + (void)test
 {
-    NSLog(@"+[NSObject test] - %p", self);
+    NSLog(@"+[NSObject test] - %p", self); //self表示当前调用对象，第一次是mjperson,第二次是nsobject
 }
 
 - (void)test

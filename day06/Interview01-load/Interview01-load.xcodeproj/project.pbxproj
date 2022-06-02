@@ -160,12 +160,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D8A3C42209DE4DF00C3523D /* MJDog.m in Sources */,
-				2D8A3C30209DDC7200C3523D /* MJPerson.m in Sources */,
-				2D8A3C45209DE4F200C3523D /* MJCat.m in Sources */,
 				2D8A3C39209DDC9B00C3523D /* MJStudent.m in Sources */,
-				2D8A3C3F209DDCB900C3523D /* MJStudent+Test2.m in Sources */,
-				2D8A3C33209DDC8300C3523D /* MJPerson+Test1.m in Sources */,
 				2D8A3C3C209DDCB000C3523D /* MJStudent+Test1.m in Sources */,
+				2D8A3C45209DE4F200C3523D /* MJCat.m in Sources */,
+				2D8A3C33209DDC8300C3523D /* MJPerson+Test1.m in Sources */,
+				2D8A3C3F209DDCB900C3523D /* MJStudent+Test2.m in Sources */,
+				2D8A3C30209DDC7200C3523D /* MJPerson.m in Sources */,
 				2D8A3C36209DDC8B00C3523D /* MJPerson+Test2.m in Sources */,
 				2D8A3C28209DDC6700C3523D /* main.m in Sources */,
 			);

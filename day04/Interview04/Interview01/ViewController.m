@@ -64,7 +64,7 @@
     self.person2 = [[MJPerson alloc] init];
     self.person2.age = 2;
     
-    // 给person1对象添加KVO监听
+    // 给person1对象添加KVO监听，此时person1的类对象已经变成了NSKVONotifying_MJPerson，但内部重写了class方法，隐藏了该类的存在
     NSKeyValueObservingOptions options = NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld;
     [self.person1 addObserver:self forKeyPath:@"age" options:options context:@"123"];
     

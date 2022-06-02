@@ -29,32 +29,40 @@
     self.person2.age = 2;
     
     
-//    NSLog(@"person1添加KVO监听之前 - %@ %@",
-//          object_getClass(self.person1),
-//          object_getClass(self.person2));
-//    NSLog(@"person1添加KVO监听之前 - %p %p",
-//          [self.person1 methodForSelector:@selector(setAge:)],
-//          [self.person2 methodForSelector:@selector(setAge:)]);
+    NSLog(@"person1添加KVO监听之前 - %@ %@",
+          object_getClass(self.person1),
+          object_getClass(self.person2));
+    NSLog(@"person1添加KVO监听之前 - %p %p",
+          [self.person1 methodForSelector:@selector(setAge:)],
+          [self.person2 methodForSelector:@selector(setAge:)]);
     
     // 给person1对象添加KVO监听
     NSKeyValueObservingOptions options = NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld;
     [self.person1 addObserver:self forKeyPath:@"age" options:options context:@"123"];
     
-//    NSLog(@"person1添加KVO监听之后 - %@ %@",
-//          object_getClass(self.person1),
-//          object_getClass(self.person2));
-//    NSLog(@"person1添加KVO监听之后 - %p %p",
-//          [self.person1 methodForSelector:@selector(setAge:)],
-//          [self.person2 methodForSelector:@selector(setAge:)]);
-//
-//
-//    NSLog(@"类对象 - %@ %@",
-//          object_getClass(self.person1),  // self.person1.isa
-//          object_getClass(self.person2)); // self.person2.isa
-//
-//    NSLog(@"元类对象 - %@ %@",
-//          object_getClass(object_getClass(self.person1)), // self.person1.isa.isa
-//          object_getClass(object_getClass(self.person2))); // self.person2.isa.isa
+    NSLog(@"person1添加KVO监听之后 - %@ %@",
+          object_getClass(self.person1),//类对象地址变了
+          object_getClass(self.person2));
+    NSLog(@"person1添加KVO监听之后 - %p %p",
+          [self.person1 methodForSelector:@selector(setAge:)],//方法在类对象中，地址也变了
+          [self.person2 methodForSelector:@selector(setAge:)]);
+
+
+    NSLog(@"类对象 - %@ %@",
+          object_getClass(self.person1),  // self.person1.isa //NSKVONotifying_MJPerson
+          object_getClass(self.person2)); // self.person2.isa //MJPerson
+    
+    NSLog(@"类对象地址 - %p %p",
+          object_getClass(self.person1),  // self.person1.isa //NSKVONotifying_MJPerson
+          object_getClass(self.person2)); // self.person2.isa //MJPerson
+
+    NSLog(@"元类对象 - %@ %@",
+          object_getClass(object_getClass(self.person1)), // self.person1.isa.isa //NSKVONotifying_MJPerson
+          object_getClass(object_getClass(self.person2))); // self.person2.isa.isa //MJPerson
+    
+    NSLog(@"元类对象地址 - %p %p",
+          object_getClass(object_getClass(self.person1)), // self.person1.isa.isa //NSKVONotifying_MJPerson
+          object_getClass(object_getClass(self.person2))); // self.person2.isa.isa //MJPerson
     
 }
 

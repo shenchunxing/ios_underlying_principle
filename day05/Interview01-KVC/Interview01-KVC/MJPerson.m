@@ -8,6 +8,10 @@
 
 #import "MJPerson.h"
 
+@implementation MJCat
+
+@end
+
 @implementation MJPerson
 
 //- (void)setAge:(int)age
@@ -18,3 +22,5 @@
 //}
 
 @end
+
+
