@@ -11,9 +11,9 @@
 #ifndef MJClassInfo_h
 #define MJClassInfo_h
 
-# if __arm64__
+# if __arm64__ //真机
 #   define ISA_MASK        0x0000000ffffffff8ULL
-# elif __x86_64__
+# elif __x86_64__ //模拟器
 #   define ISA_MASK        0x00007ffffffffff8ULL
 # endif
 
@@ -72,10 +72,10 @@ struct entsize_list_tt {
     uint32_t count;
 };
 
-struct method_t {
-    SEL name;
-    const char *types;
-    IMP imp;
+struct method_t { //方法
+    SEL name;//方法名
+    const char *types;//编码类型：返回值和参数
+    IMP imp; //指向函数的指针
 };
 
 struct method_list_t : entsize_list_tt {
@@ -115,7 +115,7 @@ struct protocol_list_t {
     protocol_ref_t list[0];
 };
 
-struct class_ro_t {
+struct class_ro_t { //只读
     uint32_t flags;
     uint32_t instanceStart;
     uint32_t instanceSize;  // instance对象占用的内存空间
@@ -131,7 +131,7 @@ struct class_ro_t {
     property_list_t *baseProperties;
 };
 
-struct class_rw_t {
+struct class_rw_t { //可读可写
     uint32_t flags;
     uint32_t version;
     const class_ro_t *ro;

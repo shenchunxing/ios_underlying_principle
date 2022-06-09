@@ -12,10 +12,9 @@
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-//        MJPerson *person = [[MJPerson alloc] init];
-//        mj_objc_class *personClass = (__bridge mj_objc_class *)[MJPerson class];
-//
-//        [person personTest];
+        MJPerson *person = [[MJPerson alloc] init];
+        mj_objc_class *personClass = (__bridge mj_objc_class *)[MJPerson class];
+        [person personTest];
         
         MJGoodStudent *goodStudent = [[MJGoodStudent alloc] init];
         mj_objc_class *goodStudentClass = (__bridge mj_objc_class *)[MJGoodStudent class];
@@ -29,6 +28,7 @@ int main(int argc, const char * argv[]) {
         NSLog(@"--------------------------");
         
         cache_t cache = goodStudentClass->cache;
+        //打印从缓存查找到的方法地址
         NSLog(@"%s %p", @selector(personTest), cache.imp(@selector(personTest)));
         NSLog(@"%s %p", @selector(studentTest), cache.imp(@selector(studentTest)));
         NSLog(@"%s %p", @selector(goodStudentTest), cache.imp(@selector(goodStudentTest)));

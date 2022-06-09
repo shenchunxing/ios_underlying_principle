@@ -44,7 +44,7 @@ typedef enum {
 -------
  0b0000
  */
-- (void)setOptions:(MJOptions)options
+- (void)setOptions:(MJOptions)options //options是按位或的结果，options & MJOptionsOne可以判断是否包含MJOptionsOne
 {
     if (options & MJOptionsOne) {
         NSLog(@"包含了MJOptionsOne");

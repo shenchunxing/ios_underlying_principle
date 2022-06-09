@@ -24,11 +24,10 @@ int main(int argc, char * argv[]) {
         [person test:10 height:20];
         
         
-//        SEL sel1 = sel_registerName("test");
-//        SEL sel2 = @selector(test);
-//
-//
-//        NSLog(@"%p %p %p", @selector(test), @selector(test), sel_registerName("test"));
+        //方法名相同，地址也是一样的
+        SEL sel1 = sel_registerName("test");
+        SEL sel2 = @selector(test);
+        NSLog(@"%p %p %p", @selector(test), @selector(test), sel_registerName("test"));
         
         
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
