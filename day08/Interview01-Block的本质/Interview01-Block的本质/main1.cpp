@@ -31641,9 +31641,10 @@ static struct __main_block_desc_0 {
   size_t Block_size;
 } __main_block_desc_0_DATA = { 0, sizeof(struct __main_block_impl_0)};
 int main(int argc, const char * argv[]) {
-    /* @autoreleasepool */ { __AtAutoreleasePool __autoreleasepool; 
+    /* @autoreleasepool */ { __AtAutoreleasePool __autoreleasepool;
+        //函数__main_block_impl_0的地址赋值给block
         void (*block)(int, int) = ((void (*)(int, int))&__main_block_impl_0((void *)__main_block_func_0, &__main_block_desc_0_DATA));
-
+        //执行block，block的FuncPtr函数
         block->FuncPtr(block, 10, 20);
 
 

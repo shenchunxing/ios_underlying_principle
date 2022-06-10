@@ -52,8 +52,9 @@ int main(int argc, const char * argv[]) {
          4、多个分类的情况，只执行一次，具体执行哪个分类的initialize，有编译顺序决定（Build Phases -> Compile Sources 中的顺序）
          5、如果子类没有重写initialize，那么会调用其父类的initialize方法
          */
-        [MJStudent alloc];
+        [MJStudent alloc]; 
         
+        //判断是否初始化
 //        if (!sutdentInitialized) {
 //            if (!personInitialized) {
 //                objc_msgSend([MJPerson class], @selector(initialize));

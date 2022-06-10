@@ -15,7 +15,7 @@ int age_ = 10;
 - (void)test
 {
     void (^block)(void) = ^{
-        NSLog(@"-------%d", [self name]);
+        NSLog(@"-------%d", [self name]); //会捕获，因为self是局部变量
     };
     block();
 }

@@ -9,31 +9,31 @@
 #import <Foundation/Foundation.h>
 
 struct __main_block_desc_0 {
-    size_t reserved;
-    size_t Block_size;
+    size_t reserved; //保留，暂时不会用
+    size_t Block_size;//大小
 };
 
 struct __block_impl {
-    void *isa;
+    void *isa;//isa指针
     int Flags;
     int Reserved;
-    void *FuncPtr;
+    void *FuncPtr;//函数地址，block执行的时候会调用
 };
 
 struct __main_block_impl_0 {
-    struct __block_impl impl;
-    struct __main_block_desc_0* Desc;
+    struct __block_impl impl;//block实现
+    struct __main_block_desc_0* Desc;//描述
     int age;
 };
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-//        ^{
-//            NSLog(@"this is a block!");
-//            NSLog(@"this is a block!");
-//            NSLog(@"this is a block!");
-//            NSLog(@"this is a block!");
-//        }();
+        ^{
+            NSLog(@"this is a block!");
+            NSLog(@"this is a block!");
+            NSLog(@"this is a block!");
+            NSLog(@"this is a block!");
+        }();
         
         int age = 20;
         

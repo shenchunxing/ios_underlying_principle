@@ -24,13 +24,13 @@
 //#define MJRichMask 0b00000010
 //#define MJHandsomeMask 0b00000100
 
-#define MJTallMask (1<<0)
-#define MJRichMask (1<<1)
-#define MJHandsomeMask (1<<2)
+#define MJTallMask (1<<0) //左移0位 也就是1
+#define MJRichMask (1<<1) //左移1位 也就是2
+#define MJHandsomeMask (1<<2)//左移2位 也就是4
 
 @interface MJPerson()
 {
-    char _tallRichHansome;
+    char _tallRichHansome; // 0b 0000 0011 //高富帅分别用1位来表示
 }
 @end
 
@@ -60,15 +60,15 @@
 }
 
 - (BOOL)isTall
-{
-    return !!(_tallRichHansome & MJTallMask);
+{   //按位与
+    return !!(_tallRichHansome & MJTallMask); //！！是为了转成bool类型（取反，再取反）
 }
 
 - (void)setRich:(BOOL)rich
 {
-    if (rich) {
+    if (rich) {  //按位或，将rich位设为1，其他不变
         _tallRichHansome |= MJRichMask;
-    } else {
+    } else { //按位或，将rich位设为0，其他不变 0b1111 1110
         _tallRichHansome &= ~MJRichMask;
     }
 }

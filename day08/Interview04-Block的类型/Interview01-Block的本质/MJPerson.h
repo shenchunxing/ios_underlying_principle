@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface MJPerson : NSObject
-@property (copy, nonatomic) void (^block)();
+@property (copy, nonatomic) void (^block)(); //确保block在堆上，用copy修饰
 @property (copy, nonatomic) NSString *name;
 
 - (void)test;

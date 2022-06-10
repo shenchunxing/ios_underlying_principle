@@ -74,7 +74,7 @@ int main(int argc, const char * argv[]) {
          MJPerson (Test2) +load
          MJStudent (Test2) +load
          */
-        [MJStudent load]; //使用后加载的分类MJStudent (Test2) +load
+        [MJStudent load]; //这里是直接走消息机制，因此会走分类的MJStudent (Test2) +load
 //        objc_msgSend();
         // isa
         // superclass

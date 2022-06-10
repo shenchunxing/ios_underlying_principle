@@ -11,7 +11,12 @@
 #define MJKey [NSString stringWithFormat:@"%p", self]
 
 @implementation MJPerson (Test)
-
+/**
+ 存在的问题:
+ 1线程不安全，
+ 2.每次新增一个属性都需要创建全局字典，重写setter getter
+ 3.字典内存会一直存在
+ */
 NSMutableDictionary *names_;
 NSMutableDictionary *weights_;
 + (void)load

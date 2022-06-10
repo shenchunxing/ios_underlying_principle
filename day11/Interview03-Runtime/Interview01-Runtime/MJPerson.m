@@ -15,14 +15,14 @@
 
 @interface MJPerson()
 {
-    union {
-        int bits;
+    union { //共用体：结合了位运算和结构体位域的特点
+        char bits;//int占用4个字节，所以共用体也是1个字节
         
-        struct {
-            char tall : 4;
-            char rich : 4;
-            char handsome : 4;
-            char thin : 4;
+        struct { //结构体只是为了增加可读性，可以去掉
+            char tall : 1;
+            char rich : 1;
+            char handsome : 1;
+            char thin : 1;
         };
     } _tallRichHandsome;
 }
