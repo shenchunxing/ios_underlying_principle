@@ -27,7 +27,7 @@ struct objc_super {
     // super调用的receiver仍然是MJStudent对象
     [super run];
     
-    
+    //objc_super的第二个成员是super_class（消息接收者的父类），目的是从父类开始查找run方法，而不是从本类开始，如果从本类开始就是死循环了
 //    struct objc_super arg = {self, [MJPerson class]};
 //
 //    objc_msgSendSuper(arg, @selector(run));
@@ -54,6 +54,7 @@ struct objc_super {
 
 @end
 
+//class的底层实现
 //@implementation NSObject
 //
 //- (Class)class
@@ -61,6 +62,7 @@ struct objc_super {
 //    return object_getClass(self);
 //}
 //
+//superclass的底层实现
 //- (Class)superclass
 //{
 //    return class_getSuperclass(object_getClass(self));

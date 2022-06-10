@@ -20,6 +20,7 @@
 //- (id)forwardingTargetForSelector:(SEL)aSelector
 //{
 //    if (aSelector == @selector(test)) {
+//。       //消息转发的第一个阶段：伪代码objc_msgSend([[MJCat alloc] init], aSelector)
 //        // objc_msgSend([[MJCat alloc] init], aSelector)
 //        return [[MJCat alloc] init];
 //    }

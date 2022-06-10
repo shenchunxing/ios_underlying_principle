@@ -36,6 +36,7 @@ int age(id self, SEL _cmd)
     return [super resolveInstanceMethod:sel];
 }
 
+//@synthesize 帮我们生成实例变量和getter、setter的实现，现在编译器已经做了这个，不需要写了
 //@synthesize age = _age, height = _height;
 
 //- (void)setAge:(int)age

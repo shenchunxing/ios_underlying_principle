@@ -11,6 +11,7 @@
 #import "MJClassInfo.h"
 #import <objc/runtime.h>
 
+//底层是汇编实现的：objc-msg-arm64文件
 void objc_msgSend(id receiver, SEL selector)
 {
     if (receiver == nil) return;

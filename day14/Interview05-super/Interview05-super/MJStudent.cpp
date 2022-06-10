@@ -32199,7 +32199,7 @@ struct MJStudent_IMPL {
 
 // @implementation MJStudent
 
-
+//从父类去查找方法，消息接收者还是子类本身
 static void _I_MJStudent_run(MJStudent * self, SEL _cmd) {
     ((void (*)(__rw_objc_super *, SEL))(void *)objc_msgSendSuper)((__rw_objc_super){(id)self, (id)class_getSuperclass(objc_getClass("MJStudent"))}, sel_registerName("run"));
     NSLog((NSString *)&__NSConstantStringImpl__var_folders_2r__m13fp2x2n9dvlr8d68yry500000gn_T_MJStudent_69ea3c_mi_0);

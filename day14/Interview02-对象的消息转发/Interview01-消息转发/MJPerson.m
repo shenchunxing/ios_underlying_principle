@@ -15,6 +15,8 @@
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
 {
     if (aSelector == @selector(test:)) {
+        
+        //3种写法等价
 //        return [NSMethodSignature signatureWithObjCTypes:"v20@0:8i16"];
         return [NSMethodSignature signatureWithObjCTypes:"i@:i"];
 //        return [[[MJCat alloc] init] methodSignatureForSelector:aSelector];
