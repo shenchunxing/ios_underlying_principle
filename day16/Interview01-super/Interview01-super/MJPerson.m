@@ -26,11 +26,12 @@ void test(int param)
 
 - (void)forwardInvocation:(NSInvocation *)anInvocation
 {
+    //调试技巧：xcode -> Product -> Perform Action -> Assemble "MJPerson.m"，可以直接转成汇编，窥探内部实现看到bl    _objc_msgSendSuper2，说明super内部调用的是_objc_msgSendSuper2方法
     [super forwardInvocation:anInvocation];
-    // 查看汇编
+    // 查看汇编，汇编的是真实的
     // objc_msgSendSuper2(struct, @selector(forwardInvocation:), anInvocation)
     
-    // 转为cpp文件
+    // 转为cpp文件和汇编有差异，但是基本原理是一样的
 //    objc_msgSendSuper({self, class_getSuperclass(objc_getClass("MJPerson"))},
 //                      @selector(forwardInvocation:),
 //                      anInvocation);

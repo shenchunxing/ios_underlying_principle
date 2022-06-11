@@ -17,6 +17,8 @@
     dispatch_once(&onceToken, ^{
         // 类簇：NSString、NSArray、NSDictionary，真实类型是其他类型
         Class cls = NSClassFromString(@"__NSArrayM");
+        //__NSArrayM NSMutableArray NSArray NSObject
+        NSLog(@"%@ %@ %@ %@",cls , [cls superclass],[[cls superclass] superclass],[[[cls superclass] superclass] superclass]);
         Method method1 = class_getInstanceMethod(cls, @selector(insertObject:atIndex:));
         Method method2 = class_getInstanceMethod(cls, @selector(mj_insertObject:atIndex:));
         method_exchangeImplementations(method1, method2);
