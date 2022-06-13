@@ -16,11 +16,15 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         Class cls = NSClassFromString(@"__NSDictionaryM");
+        //__NSDictionaryM NSMutableDictionary NSDictionary NSObject
+        NSLog(@"%@ %@ %@ %@",cls , [cls superclass],[[cls superclass] superclass],[[[cls superclass] superclass] superclass]);
         Method method1 = class_getInstanceMethod(cls, @selector(setObject:forKeyedSubscript:));
         Method method2 = class_getInstanceMethod(cls, @selector(mj_setObject:forKeyedSubscript:));
         method_exchangeImplementations(method1, method2);
         
         Class cls2 = NSClassFromString(@"__NSDictionaryI");
+        //__NSDictionaryI NSDictionary NSObject (null)
+        NSLog(@"%@ %@ %@ %@",cls2 , [cls2 superclass],[[cls2 superclass] superclass],[[[cls2 superclass] superclass] superclass]);
         Method method3 = class_getInstanceMethod(cls2, @selector(objectForKeyedSubscript:));
         Method method4 = class_getInstanceMethod(cls2, @selector(mj_objectForKeyedSubscript:));
         method_exchangeImplementations(method3, method4);
