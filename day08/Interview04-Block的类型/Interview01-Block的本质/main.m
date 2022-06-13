@@ -24,7 +24,7 @@ void test2()
     // NSStackBlock
     int age = 10;
     block = [^{
-        NSLog(@"block---------%d", age);
+        NSLog(@"block---------%d", age); //不copy会访问混乱，因为stackblock已经被销毁了，copy后在堆上，没问题
     } copy];
     [block release];
 }
@@ -41,9 +41,9 @@ void test()
     void (^block2)(void) = ^{
         NSLog(@"block2---------%d", age);
     };
-    NSLog(@"%p", [block2 copy]);
+    NSLog(@"%p", [block2 copy]);//arc会自动copy
     
-//    NSLog(@"%@ %@", [block1 class], [block2 class]);
+    NSLog(@"%@ %@", [block1 class], [block2 class]);
 }
 
 int age = 10;
@@ -58,9 +58,9 @@ int main(int argc, const char * argv[]) {
         NSLog(@"数据段：class %p", [MJPerson class]);
         
         
-//        test2();
-//
-//        block();
+        test2();
+
+        block();
         
 //        MJPerson *p = [[MJPerson alloc] init];
 //        p.block = ^{

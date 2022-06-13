@@ -13,6 +13,7 @@
 //@property (assign, nonatomic, getter=isRich) BOOL rich;
 //@property (assign, nonatomic, getter=isHansome) BOOL handsome;
 
+//将3个位放在一个字节里面
 - (void)setTall:(BOOL)tall;
 - (void)setRich:(BOOL)rich;
 - (void)setHandsome:(BOOL)handsome;

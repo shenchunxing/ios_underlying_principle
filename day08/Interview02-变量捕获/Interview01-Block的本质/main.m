@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-int age_ = 10;
-static int height_ = 10;
+int global_age_ = 10;
+static int global_height_ = 10;
 
 void (^block)(void);
 
@@ -20,21 +20,23 @@ void test()
     block = ^{
         NSLog(@"age is %d, height is %d", a, b);
     };
+    a = 30;
+    b = 40;
 }
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         test();
-        block();
+        block(); //age is 10, height is 40
         
-//        void (^block)(void) = ^{
-//            NSLog(@"age is %d, height is %d", age_, height_);
-//        };
-//
-//        age_ = 20;
-//        height_ = 20;
-//
-//        block();
+        void (^block1)(void) = ^{
+            NSLog(@"age is %d, height is %d", global_age_, global_height_); //全局变量不需要捕获，因为本身就可以访问
+        };
+
+        global_age_ = 20;
+        global_height_ = 20;
+
+        block1();
     }
     return 0;
 }

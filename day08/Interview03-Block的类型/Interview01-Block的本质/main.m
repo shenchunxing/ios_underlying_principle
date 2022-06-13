@@ -8,8 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
+void test()
+{
+    // __NSGlobalBlock__ : __NSGlobalBlock : NSBlock : NSObject
+    void (^block)(void) = ^{
+        NSLog(@"Hello");
+    };
+    
+    NSLog(@"%@", [block class]);//__NSGlobalBlock__
+    NSLog(@"%@", [[block class] superclass]);//NSBlock
+    NSLog(@"%@", [[[block class] superclass] superclass]);//NSObject
+    NSLog(@"%@", [[[[block class] superclass] superclass] superclass]);//null
+}
+
+
 /*
- 一切以运行时的结果为准
+ 一切以运行时的结果为准：clang编译后的c++文件并不是最终的
  
  clang c++
 
@@ -23,32 +37,24 @@ int main(int argc, const char * argv[]) {
     @autoreleasepool {
         int a = 10;
         
-        // 堆：动态分配内存,需要程序员申请申请，也需要程序员自己管理内存
-        void (^block1)(void) = ^{
+        void (^block1)(void) = ^{ //没有访问auto变量，__NSGlobalBlock__，存放在全局区（数据段）
             NSLog(@"Hello");
         };
         
         int age = 10;
-        void (^block2)(void) = ^{
+        void (^block2)(void) = ^{ //访问了自动变量，__NSMallocBlock__，存放在堆
             NSLog(@"Hello - %d", age);
         };
         
+        //__NSGlobalBlock__ __NSMallocBlock__ __NSStackBlock__（存放在栈）
         NSLog(@"%@ %@ %@", [block1 class], [block2 class], [^{
             NSLog(@"%d", age);
         } class]);
+        
+        NSLog(@"-------------");
+        test();
     }
     return 0;
 }
 
-void test()
-{
-    // __NSGlobalBlock__ : __NSGlobalBlock : NSBlock : NSObject
-    void (^block)(void) = ^{
-        NSLog(@"Hello");
-    };
-    
-    NSLog(@"%@", [block class]);
-    NSLog(@"%@", [[block class] superclass]);
-    NSLog(@"%@", [[[block class] superclass] superclass]);
-    NSLog(@"%@", [[[[block class] superclass] superclass] superclass]);
-}
+

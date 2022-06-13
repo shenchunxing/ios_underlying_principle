@@ -10,7 +10,7 @@
 
 @interface MJPerson (Test)
 //{
-//    int _weight;
+//    int _weight; //分类不能添加成员变量
 //}
 
 @property (assign, nonatomic) int weight;

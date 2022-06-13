@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //类对象或者元类对象地址，最后3位都是0，从isa底层的数据结构可以看出，isa & mask 得到class的33位地址值 + 后面的3位000组成了一个完整的class地址
     NSLog(@"%p", [ViewController class]);
     NSLog(@"%p", object_getClass([ViewController class]));
     NSLog(@"%p", [MJPerson class]);
