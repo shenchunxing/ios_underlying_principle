@@ -24,7 +24,8 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    [self performSelector:@selector(test) onThread:self.thread withObject:nil waitUntilDone:NO];
+    [self performSelector:@selector(test) onThread:self.thread withObject:nil waitUntilDone:NO]; //waitUntilDone是否等子线程任务完成才执行，no:不卡住，立即执行
+    NSLog(@"123");
 }
 
 // 子线程需要执行的任务
@@ -37,7 +38,7 @@
 - (void)run {
     NSLog(@"%s %@", __func__, [NSThread currentThread]);
     
-    // 往RunLoop里面添加Source\Timer\Observer
+    // 往RunLoop里面添加Source\Timer\Observer，如果没有Source\Timer\Observer，runloop会退出
     [[NSRunLoop currentRunLoop] addPort:[[NSPort alloc] init] forMode:NSDefaultRunLoopMode];
     [[NSRunLoop currentRunLoop] run];
     

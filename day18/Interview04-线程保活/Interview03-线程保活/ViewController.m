@@ -26,8 +26,9 @@
         NSLog(@"%@----begin----", [NSThread currentThread]);
         
         // 往RunLoop里面添加Source\Timer\Observer
+        //线程保活
         [[NSRunLoop currentRunLoop] addPort:[[NSPort alloc] init] forMode:NSDefaultRunLoopMode];
-        while (!weakSelf.isStoped) {
+        while (!weakSelf.isStoped) { //可以停止的runloop，runloop会一直调用，直到条件不满足，不写while循环，runloop就执行一次，无法保活
             [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
         }
         
@@ -66,7 +67,7 @@
     // 设置标记为NO
     self.stopped = YES;
     
-    // 停止RunLoop
+    // 停止RunLoop，这个方法只是停止刚才运行的一次runloop
     CFRunLoopStop(CFRunLoopGetCurrent());
     NSLog(@"%s %@", __func__, [NSThread currentThread]);
 }
@@ -75,7 +76,8 @@
 {
     NSLog(@"%s", __func__);
     
-//    [self stop];
+    //这里崩溃的原因是waitUntilDone = no,不等待子线程执行，dealloc执行立马结束，self已经释放，子线程访问坏内存访问
+    [self stop];
 }
 
 @end

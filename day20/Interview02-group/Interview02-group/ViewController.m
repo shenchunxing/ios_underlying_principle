@@ -27,6 +27,7 @@
     dispatch_queue_t queue = dispatch_queue_create("my_queue", DISPATCH_QUEUE_CONCURRENT);
     
     // 添加异步任务
+    // 任务1 2交替执行
     dispatch_group_async(group, queue, ^{
         for (int i = 0; i < 5; i++) {
             NSLog(@"任务1-%@", [NSThread currentThread]);
@@ -54,6 +55,8 @@
 //        }
 //    });
     
+    
+    //任务3 4交替执行
     dispatch_group_notify(group, queue, ^{
         for (int i = 0; i < 5; i++) {
             NSLog(@"任务3-%@", [NSThread currentThread]);

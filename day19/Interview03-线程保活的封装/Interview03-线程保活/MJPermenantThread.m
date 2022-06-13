@@ -31,6 +31,7 @@
         self.innerThread = [[MJThread alloc] initWithBlock:^{
             NSLog(@"begin----");
             
+            //c语言api启动线程
             // 创建上下文（要初始化一下结构体）
             CFRunLoopSourceContext context = {0};
             
@@ -43,7 +44,7 @@
             // 销毁source
             CFRelease(source);
             
-            // 启动
+            // 启动，设置为false，代表执行完source后不会退出当前loop
             CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1.0e10, false);
             
 //            while (weakSelf && !weakSelf.isStopped) {

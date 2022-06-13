@@ -22,6 +22,7 @@
 //        NSLog(@"123");
 //    }];
     
+    //gcd一般的api都和runloop无关，但是这种回到主线程的api和runloop有关
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
         // 处理一些子线程的逻辑
@@ -35,7 +36,7 @@
 
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    // 函数调用栈
+    // 函数调用栈，查看是从cfrunlooprunspecific开始的，查看源码
     NSLog(@"111111");
 }
 

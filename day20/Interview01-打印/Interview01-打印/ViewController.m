@@ -17,20 +17,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    [self test2];
 }
 
+//1 3 2
 - (void)test2
 {
     dispatch_queue_t queue = dispatch_get_global_queue(0, 0);
     
     dispatch_async(queue, ^{
         NSLog(@"1");
-        // 这句代码的本质是往Runloop中添加定时器
+        // 这句代码的本质是往Runloop中添加定时器,子线程必须开启runloop
         [self performSelector:@selector(test) withObject:nil afterDelay:.0];
         NSLog(@"3");
         
         //        [[NSRunLoop currentRunLoop] addPort:[[NSPort alloc] init] forMode:NSDefaultRunLoopMode];
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+//        [[NSRunLoop currentRunLoop] run];
     });
 }
 
@@ -39,6 +43,7 @@
     NSLog(@"2");
 }
 
+//1 2
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     NSThread *thread = [[NSThread alloc] initWithBlock:^{
         NSLog(@"1");

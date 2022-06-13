@@ -92,6 +92,7 @@
  thread1：优先级比较高
  
  thread2：优先级比较低
+ 优先级反转：如果一开始thread2先拿到锁，导致thread1一直在忙等，而cpu一直在给thread1分配资源，导致thread2无法解锁。
  
  thread3
  

@@ -29,6 +29,8 @@
     // timer能在_commonModes数组中存放的模式下工作
     [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
     
+    
+    //定制的定时器，运行在NSDefaultRunLoopMode模式下，滚动的时候，定时器会暂停
 //    [NSTimer scheduledTimerWithTimeInterval:1.0 repeats:YES block:^(NSTimer * _Nonnull timer) {
 //        NSLog(@"%d", ++count);
 //    }];

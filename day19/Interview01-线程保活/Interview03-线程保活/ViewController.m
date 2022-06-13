@@ -16,6 +16,7 @@
 
 @implementation ViewController
 
+//完善逻辑，导航返回的时候，也能销毁runloop
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -28,6 +29,7 @@
         // 往RunLoop里面添加Source\Timer\Observer
         [[NSRunLoop currentRunLoop] addPort:[[NSPort alloc] init] forMode:NSDefaultRunLoopMode];
     
+        //这里self可能为空，返回的时候释放了，所以要加判断self是否存在
         while (weakSelf && !weakSelf.isStoped) {
             [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
         }
@@ -39,7 +41,7 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    if (!self.thread) return;
+    if (!self.thread) return; //线程被销毁，就不要在里面做事情
     [self performSelector:@selector(test) onThread:self.thread withObject:nil waitUntilDone:NO];
 }
 
@@ -50,7 +52,7 @@
 }
 
 - (IBAction)stop {
-    if (!self.thread) return;
+    if (!self.thread) return; //线程被销毁，就不要在里面做事情
     
     // 在子线程调用stop（waitUntilDone设置为YES，代表子线程的代码执行完毕后，这个方法才会往下走）
     [self performSelector:@selector(stopThread) onThread:self.thread withObject:nil waitUntilDone:YES];
@@ -66,7 +68,7 @@
     CFRunLoopStop(CFRunLoopGetCurrent());
     NSLog(@"%s %@", __func__, [NSThread currentThread]);
     
-    // 清空线程
+    // 销毁线程
     self.thread = nil;
 }
 
