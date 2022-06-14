@@ -17,7 +17,7 @@ dispatch_semaphore_t semaphore_;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         timers_ = [NSMutableDictionary dictionary];
-        semaphore_ = dispatch_semaphore_create(1);
+        semaphore_ = dispatch_semaphore_create(1); //第一次使用的时候创建
     });
 }
 
@@ -79,7 +79,7 @@ dispatch_semaphore_t semaphore_;
     
     dispatch_semaphore_wait(semaphore_, DISPATCH_TIME_FOREVER);
     
-    dispatch_source_t timer = timers_[name];
+    dispatch_source_t timer = timers_[name]; //根据name获取定时器
     if (timer) {
         dispatch_source_cancel(timer);
         [timers_ removeObjectForKey:name];

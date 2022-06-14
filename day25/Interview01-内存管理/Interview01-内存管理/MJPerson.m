@@ -22,10 +22,15 @@
 
 - (void)setDog:(MJDog *)dog
 {
-    if (_dog != dog) {
-        [_dog release];
-        _dog = [dog retain];
+    if (_dog != dog) { //不判断可能两只狗是一样的，狗直接被释放了
+        [_dog release]; //将上一只狗先释放
+        _dog = [dog retain];//再拥有当前这只狗
     }
+    
+    //这种写法也可以
+//    [dog retain];
+//    [_dog release];
+//    _dog = dog;
 }
 
 - (MJDog *)dog
@@ -50,7 +55,7 @@
 {
 //    [_dog release];
 //    _dog = nil;
-    self.dog = nil;
+    self.dog = nil; //等价//[_dog release]、dog = nil;。走的是setter方法
     self.car = nil;
     
     NSLog(@"%s", __func__);

@@ -30,18 +30,21 @@ void test()
     //        NSMutableString *str3 = [str1 mutableCopy]; // 返回的是NSMutableString
     
     NSMutableString *str1 = [NSMutableString stringWithFormat:@"test"];
-    NSString *str2 = [str1 copy];
-    NSMutableString *str3 = [str1 mutableCopy];
+    NSString *str2 = [str1 copy];//深拷贝
+    NSMutableString *str3 = [str1 mutableCopy];//深拷贝
     
     NSLog(@"%@ %@ %@", str1, str2, str3);
+    NSLog(@"%p %p %p", str1, str2, str3);
 }
 
 void test2()
 {
-    NSString *str1 = [[NSString alloc] initWithFormat:@"test"];
+    NSString *str1 = [[NSString alloc] initWithFormat:@"test9889989898989889"];
+    //对于不可变字符串，copy此时相当于retain，引用计数会+1
     NSString *str2 = [str1 copy]; // 浅拷贝，指针拷贝，没有产生新对象
     NSMutableString *str3 = [str1 mutableCopy]; // 深拷贝，内容拷贝，有产生新对象
     
+    NSLog(@"%lu",(unsigned long)str1.retainCount);// 2
     NSLog(@"%@ %@ %@", str1, str2, str3);
     NSLog(@"%p %p %p", str1, str2, str3);
     
@@ -64,6 +67,8 @@ int main(int argc, const char * argv[]) {
         [str1 release];
         [str2 release];
         [str3 release];
+        
+        test2();
     }
     return 0;
 }

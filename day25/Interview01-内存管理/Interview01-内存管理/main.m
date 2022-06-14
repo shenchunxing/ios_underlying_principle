@@ -19,7 +19,7 @@ void test()
 //    MJPerson *person2 = [[[MJPerson alloc] init] autorelease];
 }
 
-void test2()
+void test2() //为了保证person对象在，dog就在
 {
     MJDog *dog = [[MJDog alloc] init]; // 1
     
@@ -37,7 +37,7 @@ void test2()
     [person2 release]; // 0
 }
 
-void test3()
+void test3() //存在的问题：dag1无法释放，引用计数还是1
 {
     MJDog *dog1 = [[MJDog alloc] init]; // dog1 : 1
     MJDog *dog2 = [[MJDog alloc] init]; // dog2 : 1
@@ -51,7 +51,7 @@ void test3()
     [person release]; // dog2 : 0
 }
 
-void test4()
+void test4() //存在的问题：同一只狗多次setter，狗先被release，如果dog计数是，则直接被释放了
 {
     MJDog *dog = [[MJDog alloc] init]; // dog:1
     

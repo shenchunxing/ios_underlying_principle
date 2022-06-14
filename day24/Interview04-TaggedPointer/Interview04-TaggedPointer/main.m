@@ -10,7 +10,7 @@
 
 BOOL isTaggedPointer(id pointer)
 {
-    return (long)(__bridge void *)pointer & 1;
+    return (long)(__bridge void *)pointer & 1; //指针的最低有效位是1
 }
 
 int main(int argc, const char * argv[]) {
@@ -22,9 +22,9 @@ int main(int argc, const char * argv[]) {
         NSNumber *number2 = @5;
         NSNumber *number3 = @(0xFFFFFFFFFFFFFFF);
         
-        number1.intValue;
+        number1.intValue; //这种还是会执行objc_msgSend，内部做了优化，没有堆空间，没有对象。直接从直接里面读取
         
-//        NSLog(@"%d %d %d", isTaggedPointer(number1), isTaggedPointer(number2), isTaggedPointer(number3));
+        NSLog(@"%d %d %d", isTaggedPointer(number1), isTaggedPointer(number2), isTaggedPointer(number3));
         NSLog(@"%p %p %p", number1, number2, number3);
     }
     return 0;

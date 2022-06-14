@@ -9,21 +9,21 @@
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 
-int a = 10;
-int b;
+int a = 10; //已初始化数据
+int b;//未初始化数据
 
 int main(int argc, char * argv[]) {
     @autoreleasepool {
-        static int c = 20;
+        static int c = 20; //已初始化静态变量
         
-        static int d;
+        static int d;//未初始化静态变量
         
-        int e;
-        int f = 20;
+        int e; //未初始化局部变量，在栈上
+        int f = 20;//已初始化局部变量，在栈上
 
-        NSString *str = @"123";
+        NSString *str = @"123";//常量区
         
-        NSObject *obj = [[NSObject alloc] init];
+        NSObject *obj = [[NSObject alloc] init];//堆
         
         NSLog(@"\n&a=%p\n&b=%p\n&c=%p\n&d=%p\n&e=%p\n&f=%p\nstr=%p\nobj=%p\n",
               &a, &b, &c, &d, &e, &f, str, obj);
@@ -32,22 +32,24 @@ int main(int argc, char * argv[]) {
     }
 }
 
+//地址从低到高
 /*
- 字符串常量
- str=0x10dfa0068
+ 数据段：
+     字符串常量
+     str=0x10dfa0068
+     
+     已初始化的全局变量、静态变量
+     &a =0x10dfa0db8
+     &c =0x10dfa0dbc
+     
+     未初始化的全局变量、静态变量
+     &d =0x10dfa0e80
+     &b =0x10dfa0e84
  
- 已初始化的全局变量、静态变量
- &a =0x10dfa0db8
- &c =0x10dfa0dbc
- 
- 未初始化的全局变量、静态变量
- &d =0x10dfa0e80
- &b =0x10dfa0e84
- 
- 堆
+ 堆：
  obj=0x608000012210
  
- 栈
+ 栈：
  &f =0x7ffee1c60fe0
  &e =0x7ffee1c60fe4
  */
