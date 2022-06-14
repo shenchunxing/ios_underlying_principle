@@ -16,6 +16,7 @@
 #import "MutexDemo3.h"
 #import "NSLockDemo.h"
 #import "NSConditionDemo.h"
+#import "NSConditionDemo2.h"
 
 @interface ViewController ()
 @property (strong, nonatomic) MJBaseDemo *demo;
@@ -26,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    MJBaseDemo *demo = [[NSConditionDemo alloc] init];
+    MJBaseDemo *demo = [[NSConditionDemo2 alloc] init];
 //    [demo ticketTest];
 //    [demo moneyTest];
     [demo otherTest];

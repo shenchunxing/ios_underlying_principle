@@ -10,6 +10,7 @@
 
 @implementation MJProxy
 
+//NSProxy专门用于消息转发，没有从父类查找方法和动态方法解析的过程，效率更高
 + (instancetype)proxyWithTarget:(id)target
 {
     // NSProxy对象不需要调用init，因为它本来就没有init方法

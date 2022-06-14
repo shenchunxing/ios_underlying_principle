@@ -15,77 +15,81 @@
 
 @implementation ViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-//    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-//    queue.maxConcurrentOperationCount = 5;
-    
-//    dispatch_semaphore_create(5);
-    
-    self.queue = dispatch_queue_create("rw_queue", DISPATCH_QUEUE_CONCURRENT);
-    
-    for (int i = 0; i < 10; i++) {
-        dispatch_async(self.queue, ^{
-            [self read];
-        });
-        
-        dispatch_async(self.queue, ^{
-            [self read];
-        });
-        
-        dispatch_async(self.queue, ^{
-            [self read];
-        });
-        
-        dispatch_barrier_async(self.queue, ^{
-            [self write];
-        });
-    }
-}
-
-
-- (void)read {
-    sleep(1);
-    NSLog(@"read");
-}
-
-- (void)write
-{
-    sleep(1);
-    NSLog(@"write");
-}
-
-@end
-
 //- (void)viewDidLoad {
 //    [super viewDidLoad];
+//
+////    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+////    queue.maxConcurrentOperationCount = 5;
+//
+////    dispatch_semaphore_create(5);
 //
 //    self.queue = dispatch_queue_create("rw_queue", DISPATCH_QUEUE_CONCURRENT);
 //
 //    for (int i = 0; i < 10; i++) {
-//        [self read];
-//        [self read];
-//        [self read];
-//        [self write];
+//        dispatch_async(self.queue, ^{
+//            [self read];
+//        });
+//
+//        dispatch_async(self.queue, ^{
+//            [self read];
+//        });
+//
+//        dispatch_async(self.queue, ^{
+//            [self read];
+//        });
+//
+//        dispatch_barrier_async(self.queue, ^{
+//            [self write];
+//        });
 //    }
 //}
 //
 //
 //- (void)read {
-//    dispatch_async(self.queue, ^{
-//        sleep(1);
-//        NSLog(@"read");
-//    });
+//    sleep(1);
+//    NSLog(@"read");
 //}
 //
 //- (void)write
 //{
-//    dispatch_barrier_async(self.queue, ^{
-//        sleep(1);
-//        NSLog(@"write");
-//    });
+//    sleep(1);
+//    NSLog(@"write");
 //}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+//    self.queue = dispatch_queue_create("rw_queue", DISPATCH_QUEUE_SERIAL);
+    self.queue = dispatch_queue_create("rw_queue", DISPATCH_QUEUE_CONCURRENT);
+//    self.queue = dispatch_get_global_queue(0, 0);
+
+    for (int i = 0; i < 10; i++) {
+        [self read];
+        [self read];
+        [self read];
+        [self write];
+    }
+}
+
+
+- (void)read {
+    dispatch_async(self.queue, ^{ //读取也要加锁，因为可能在读的时候，刚好在写。不允许同时读和写
+        NSLog(@"read");
+    });
+}
+
+- (void)write
+{
+    //注意：dispatch_barrier_async传入的并发队列，必须是自己创建的并发队列，不能是全局的
+    //如果传入的是全局并发队列或者串行队列，相当于dispatch_async
+    dispatch_barrier_async(self.queue, ^{//写肯定需要加锁，同一时间保证只有1条线程在写
+        NSLog(@"write");
+    });
+}
+
+@end
+
+
 //
 //
 //@end

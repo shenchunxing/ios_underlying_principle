@@ -46,7 +46,7 @@
 }
 
 // 生产者-消费者模式
-
+// 不管哪个线程先进来，总是先添加元素，再删除元素
 // 线程1
 // 删除数组中的元素
 - (void)__remove
@@ -55,7 +55,7 @@
     NSLog(@"__remove - begin");
     
     if (self.data.count == 0) {
-        // 等待
+        // 等待,会把锁放开
         pthread_cond_wait(&_cond, &_mutex);
     }
     
@@ -76,9 +76,9 @@
     [self.data addObject:@"Test"];
     NSLog(@"添加了元素");
     
-    // 信号
+    // 信号：唤醒等待的一个线程
     pthread_cond_signal(&_cond);
-    // 广播
+    // 广播：唤醒所有线程
 //    pthread_cond_broadcast(&_cond);
     
     pthread_mutex_unlock(&_mutex);

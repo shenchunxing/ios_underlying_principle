@@ -45,13 +45,14 @@
  线程2：otherTest（等待）
  */
 
+//递归锁针对的是同一个线程，可以重复加锁，其他线程发现锁被加还是进不来的。因此递归锁保证线程安全的
 - (void)otherTest
 {
     pthread_mutex_lock(&_mutex);
     
     NSLog(@"%s", __func__);
     
-    static int count = 0;
+    static int count = 0; //static全局存在，直到程序退出
     if (count < 10) {
         count++;
         [self otherTest];

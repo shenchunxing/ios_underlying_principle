@@ -17,6 +17,7 @@
     return proxy;
 }
 
+//转发给target去执行aSelector
 - (id)forwardingTargetForSelector:(SEL)aSelector
 {
     return self.target;

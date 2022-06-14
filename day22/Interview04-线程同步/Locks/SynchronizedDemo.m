@@ -12,16 +12,17 @@
 
 - (void)__drawMoney
 {
-    @synchronized([self class]) {
+    @synchronized([self class]) { //保证同一个对象就行[self class] 、 self
         [super __drawMoney];
     }
 }
 
 - (void)__saveMoney
 {
-    @synchronized([self class]) { // objc_sync_enter
+    @synchronized([self class]) { // 查看汇编调用了runtime：objc_sync_enter
+        //底层实现是将传入的对象作为可key，映射到哈希表上。每个key对应一个锁，里面是使用recursive_mutex这个递归锁，recursive_mutex里面封装的是 pthread_mutex_t这个锁
         [super __saveMoney];
-    } // objc_sync_exit
+    } // runtime：objc_sync_exit
 }
 
 - (void)__saleTicket
@@ -32,7 +33,7 @@
         lock = [[NSObject alloc] init];
     });
     
-    @synchronized(lock) {
+    @synchronized(lock) { //单例可以保证同一个对象
         [super __saleTicket];
     }
 }

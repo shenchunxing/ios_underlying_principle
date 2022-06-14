@@ -40,7 +40,7 @@
 
 - (void)__saleTicket
 {
-    dispatch_sync(self.ticketQueue, ^{
+    dispatch_sync(self.ticketQueue, ^{ //这里sync就行，在子线程执行没问题，如果asnyc可能再开一条线程
         [super __saleTicket];
     });
 }
