@@ -26,11 +26,11 @@ int main(int argc, const char * argv[]) {
  
  struct __AtAutoreleasePool {
     __AtAutoreleasePool() { // 构造函数，在创建结构体的时候调用
-        atautoreleasepoolobj = objc_autoreleasePoolPush();
+        atautoreleasepoolobj = objc_autoreleasePoolPush(); //将POOL_BOUNDARY入栈，并返回第一个可填充的地址atautoreleasepoolobj
     }
  
     ~__AtAutoreleasePool() { // 析构函数，在结构体销毁的时候调用
-        objc_autoreleasePoolPop(atautoreleasepoolobj);
+        objc_autoreleasePoolPop(atautoreleasepoolobj); //告诉pop，当初的第一个填充的地址atautoreleasepoolobj。这样，释放的时候将autorelease对象，一个个逆序释放，直到遇到atautoreleasepoolobj。
     }
  
     void * atautoreleasepoolobj;

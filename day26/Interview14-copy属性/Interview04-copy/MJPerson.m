@@ -14,7 +14,7 @@
 //{
 //    if (_data != data) {
 //        [_data release];
-//        _data = [data copy];
+//        _data = [data copy]; //如果修饰data的是copy，而传入的是可变数组，这里会强制变成不可变
 //    }
 //}
 
