@@ -36,7 +36,7 @@
         app.image = @"QQ";
         
         // 设置数据
-        self.name = app.name;
+        self.name = app.name; //viewmodel的name属性变了，就会触发kvo，导致MJAppView发生改变
         self.image = app.image;
     }
     return self;

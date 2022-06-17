@@ -38,6 +38,7 @@
     _viewModel = viewModel;
     
     __weak typeof(self) waekSelf = self;
+    //MJAppView监听viewModel的属性变化，作出相应改变
     [self.KVOController observe:viewModel keyPath:@"name" options:NSKeyValueObservingOptionNew block:^(id  _Nullable observer, id  _Nonnull object, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         waekSelf.nameLabel.text = change[NSKeyValueChangeNewKey];
     }];

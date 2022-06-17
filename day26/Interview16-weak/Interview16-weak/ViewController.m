@@ -31,6 +31,10 @@
         MJPerson *person = [[MJPerson alloc] init];
         
         person3 = person;
+        int a;
+        //(__bridge void *)person是取出person存储的地址，也就是MJPerson对象的地址
+        //&person,打印的是指针在栈上的地址
+        NSLog(@"%p %p  %p  %p",person,(__bridge void *)person , &person, &a);
     }
     
     NSLog(@"222 - %@", person3);
