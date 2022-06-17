@@ -13,6 +13,7 @@
 
 + (void)load
 {
+    //为了确保只执行一次，最好加上这个。可能存在一些不规范，可能出现多次执行，比如主动调用[class load]。
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         // 类簇：NSString、NSArray、NSDictionary，真实类型是其他类型

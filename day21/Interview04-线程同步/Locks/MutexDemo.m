@@ -35,7 +35,7 @@
 //    pthread_mutexattr_init(&attr);
 //    pthread_mutexattr_settype(&attr, PTHREAD_MUTEX_DEFAULT);
     // 初始化锁
-    pthread_mutex_init(mutex, NULL);
+    pthread_mutex_init(mutex, NULL);//传空就是PTHREAD_MUTEX_DEFAULT
     // 销毁属性
 //    pthread_mutexattr_destroy(&attr);
 }
@@ -50,6 +50,9 @@
 }
 
 // 死锁：永远拿不到锁
+/**
+ 通过llvm c可以继续下一个断点，指令si可以单步执行汇编，最后发现最后执行到syscall（非常内核的函数）后，断点消失了，去休眠去了
+ */
 - (void)__saleTicket
 {
     pthread_mutex_lock(&_ticketMutex);

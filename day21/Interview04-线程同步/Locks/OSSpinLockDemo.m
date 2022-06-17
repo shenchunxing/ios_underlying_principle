@@ -17,6 +17,10 @@
 
 @implementation OSSpinLockDemo
 
+/**
+ 通过llvm 指令si可以单步执行汇编，最后发现一直在循环执行某一段汇编指令，这就是典型的while循环。证明OSSpinLock是在自旋
+ next: 一步执行汇编，遇到函数调用也会一步跨过
+ */
 - (instancetype)init
 {
     if (self = [super init]) {

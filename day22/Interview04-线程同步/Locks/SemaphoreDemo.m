@@ -20,7 +20,7 @@
 {
     if (self = [super init]) {
         self.semaphore = dispatch_semaphore_create(5);
-        self.ticketSemaphore = dispatch_semaphore_create(1);
+        self.ticketSemaphore = dispatch_semaphore_create(1); //确保每次只执行一个线程
         self.moneySemaphore = dispatch_semaphore_create(1);
     }
     return self;

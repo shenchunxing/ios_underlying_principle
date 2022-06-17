@@ -15,15 +15,16 @@ int main(int argc, const char * argv[]) {
         
         
         for (int i = 0; i < 10; i++) {
-            dispatch_async(NULL, ^{
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
                 // 加锁
-                p.data = [NSMutableArray array];
+                p.data = [NSMutableArray array]; //data用atomic修饰，p.data = [NSMutableArray array]，setter是线程安全的
                 // 解锁
             });
         }
         
         
-        NSMutableArray *array = p.data;
+        NSMutableArray *array = p.data; //getter是线程安全的
+        //下面3句不是线程安全的。需要加锁
         // 加锁
         [array addObject:@"1"];
         [array addObject:@"2"];

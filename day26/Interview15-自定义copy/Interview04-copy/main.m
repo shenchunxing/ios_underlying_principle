@@ -14,6 +14,8 @@ int main(int argc, const char * argv[]) {
         MJPerson *p1 = [[MJPerson alloc] init];
         p1.age = 20;
         p1.weight = 50;
+        
+        //arm64架构，引用计数已经存储在isa指针里面了。如果不够存储，就存储到sidetable这个数据结构里面，里面是一个哈希表
 
         MJPerson *p2 = [p1 copy];
 //        p2.age = 30;

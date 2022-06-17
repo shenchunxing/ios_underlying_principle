@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0623D0B028583FF9009EC721 /* NSConditionDemo2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0623D0AF28583FF8009EC721 /* NSConditionDemo2.m */; };
 		2D835A7920CEA39D009E0982 /* OSUnfairLockDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D835A7820CEA39D009E0982 /* OSUnfairLockDemo.m */; };
 		2D835A7C20CEA60B009E0982 /* MutexDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D835A7B20CEA60B009E0982 /* MutexDemo.m */; };
 		2D835A7F20CEA907009E0982 /* MutexDemo2.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D835A7E20CEA907009E0982 /* MutexDemo2.m */; };
@@ -25,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0623D0AE28583FF8009EC721 /* NSConditionDemo2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSConditionDemo2.h; sourceTree = "<group>"; };
+		0623D0AF28583FF8009EC721 /* NSConditionDemo2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSConditionDemo2.m; sourceTree = "<group>"; };
 		2D835A7720CEA39D009E0982 /* OSUnfairLockDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSUnfairLockDemo.h; sourceTree = "<group>"; };
 		2D835A7820CEA39D009E0982 /* OSUnfairLockDemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSUnfairLockDemo.m; sourceTree = "<group>"; };
 		2D835A7A20CEA60B009E0982 /* MutexDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MutexDemo.h; sourceTree = "<group>"; };
@@ -120,6 +123,8 @@
 				2D835A8720CEBD2F009E0982 /* NSLockDemo.m */,
 				2D835A8920CEBFE9009E0982 /* NSConditionDemo.h */,
 				2D835A8A20CEBFE9009E0982 /* NSConditionDemo.m */,
+				0623D0AE28583FF8009EC721 /* NSConditionDemo2.h */,
+				0623D0AF28583FF8009EC721 /* NSConditionDemo2.m */,
 			);
 			path = Locks;
 			sourceTree = "<group>";
@@ -203,6 +208,7 @@
 				2DC1282420C9791200F498D0 /* OSSpinLockDemo2.m in Sources */,
 				2DC1281520C96ED700F498D0 /* main.m in Sources */,
 				2DC1281D20C976E800F498D0 /* MJBaseDemo.m in Sources */,
+				0623D0B028583FF9009EC721 /* NSConditionDemo2.m in Sources */,
 				2D835A7C20CEA60B009E0982 /* MutexDemo.m in Sources */,
 				2DC1280720C96ED700F498D0 /* AppDelegate.m in Sources */,
 				2D835A8820CEBD2F009E0982 /* NSLockDemo.m in Sources */,

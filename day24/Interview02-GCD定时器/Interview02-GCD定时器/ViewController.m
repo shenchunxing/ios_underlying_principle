@@ -21,6 +21,9 @@
     
     NSLog(@"begin");
     
+    //nstimer,和cadisplaylink都是依赖runloop的。每次runloop跑完一圈，会查看是否满足定时器条件，
+    //不满足继续跑圈，可能下一次跑圈花费的时间很多，导致满足定时器的触发时，时间已经过了
+    
     // 接口设计
     self.task = [MJTimer execTask:self
                          selector:@selector(doTask)
