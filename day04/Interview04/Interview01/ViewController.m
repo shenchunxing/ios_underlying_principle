@@ -28,6 +28,68 @@
 
 @implementation ViewController
 
+// MARK: - KVO的优缺点
+/**
+ 优点
+
+ 1、可以方便快捷的实现两个对象的关联同步，例如view & model
+ 2、能够观察到新值和旧值的变化
+ 3、可以方便的观察到嵌套类型的数据变化
+
+
+ 缺点
+
+ 1、观察对象通过string类型设置，如果写错或者变量名改变，编译时可以通过但是运行时会发生crash
+ 2、观察多个值需要在代理方法中多个if判断
+ 3、忘记移除观察者或重复移除观察者会导致crash
+ */
+
+// MARK: - 给KVO添加筛选条件
+/**
+ 重写automaticallyNotifiesObserversForKey，需要筛选的key返回NO。
+ setter里添加判断后手动触发KVO
+
+ + (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key {
+     if ([key isEqualToString:@"age"]) {
+         return NO;
+     }
+     return [super automaticallyNotifiesObserversForKey:key];
+ }
+ ​
+ - (void)setAge:(NSInteger)age {
+     if (age >= 18) {
+         [self willChangeValueForKey:@"age"];
+         _age = age;
+         [self didChangeValueForKey:@"age"];
+     }else {
+         _age = age;
+     }
+ }
+ */
+
+// MARK: - 使用KVC修改会触发KVO吗？
+/**
+ 会，只要accessInstanceVariablesDirectly返回YES，通过KVC修改成员变量的值会触发KVO。
+ 这说明KVC内部调用了willChangeValueForKey:方法和didChangeValueForKey:方法
+ */
+
+// MARK: - KVO的崩溃与防护
+/**
+ 崩溃原因：
+
+ KVO 添加次数和移除次数不匹配，大部分是移除多于注册。
+ 被观察者dealloc时仍然注册着 KVO，导致崩溃。
+ 添加了观察者，但未实现 observeValueForKeyPath:ofObject:change:context: 。
+ 
+ 防护方案1：
+ 直接使用facebook开源框架KVOController
+ 防护方案2：
+ 自定义一个哈希表，记录观察者和观察对象的关系。
+ 使用fishhook替换 addObserver:forKeyPath:options:context:，在添加前先判断是否已经存在相同观察者，不存在才添加，避免重复触发造成bug。
+ 使用fishhook替换removeObserver:forKeyPath:和removeObserver:forKeyPath:context，移除之前判断是否存在对应关系，如果存在才释放。
+ 使用fishhook替换dealloc，执行dealloc前判断是否存在未移除的观察者，存在的话先移除。
+ */
+
 - (void)printMethodNamesOfClass:(Class)cls
 {
     unsigned int count;
